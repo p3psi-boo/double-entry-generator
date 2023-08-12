@@ -70,6 +70,13 @@ func (w Wechat) GetAccountsAndTags(o *ir.Order, cfg *config.Config, target, prov
 			sep = *r.Separator
 		}
 
+		if r.Expr != nil {
+			match = util.ExprMatch(*r.Expr, o)
+			if match {
+				log.Printf("Expr match, %v", o)
+			}
+		}
+
 		matchFunc := util.SplitFindContains
 		if r.FullMatch {
 			matchFunc = util.SplitFindEquals

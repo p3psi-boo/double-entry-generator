@@ -5,7 +5,30 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/antonmedv/expr"
+	"github.com/fatih/structs"
+	"github.com/deb-sig/double-entry-generator/pkg/ir"
 )
+
+func ExprMatch(str string, order *ir.Order) bool {
+
+	env := structs.Map(order)
+
+	program, err := expr.Compile(str, expr.Env(env))
+	if err != nil {
+		fmt.Printf("Compile err %v", err)
+		return false
+	}
+
+	output, err := expr.Run(program, env)
+	if err != nil {
+		fmt.Printf("Run err %v", err)
+		return false
+	}
+
+	return output.(bool)
+}
 
 func SplitFindContains(str, target, sep string, match bool) bool {
 	ss := strings.Split(str, sep)
