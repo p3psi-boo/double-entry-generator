@@ -34,7 +34,7 @@ type Rule struct {
 	MethodAccount     *string `mapstructure:"methodAccount,omitempty"`
 	TargetAccount     *string `mapstructure:"targetAccount,omitempty"`
 	CommissionAccount *string `mapstructure:"commissionAccount,omitempty"`
-	Expr	 	  *string `mapstructure:"priceLimit,omitempty"`
+	Expr	 	  *string `mapstructure:"expr,omitempty"`
 	FullMatch         bool    `mapstructure:"fullMatch,omitempty"`
 	Tag               *string `mapstructure:"tag,omitempty"`
 	Ignore            bool    `mapstructure:"ignore,omitempty"` // default: false
